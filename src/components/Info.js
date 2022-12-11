@@ -2,9 +2,58 @@ import React from "react";
 import styled from "styled-components";
 import { GoRepo, GoGist } from "react-icons/go";
 import { FiUsers, FiUserPlus } from "react-icons/fi";
+import { useGloblaContext } from "../context/context";
 
 const UserInfo = () => {
-  return <h2>user info component</h2>;
+  const { user, repos } = useGloblaContext();
+  console.log(user);
+  const { followers, public_gists, public_repos, following } = user;
+  const userInfo = [
+    {
+      id: 1,
+      number: public_repos,
+      name: "Repos",
+      icon: <GoRepo className="icon" />,
+      color: "pink",
+    },
+    {
+      id: 2,
+      number: followers,
+      name: "Followers",
+      icon: <FiUsers className="icon" />,
+      color: "green",
+    },
+    {
+      id: 3,
+      number: following,
+      name: "Following",
+      icon: <FiUserPlus className="icon" />,
+      color: "purple",
+    },
+    {
+      id: 4,
+      number: public_gists,
+      name: "Gists",
+      icon: <GoGist className="icon" />,
+      color: "yellow",
+    },
+  ];
+  console.log(userInfo);
+  return (
+    <Wrapper className="section-center">
+      {userInfo.map((data) => {
+        return (
+          <article className="item" key={data.id}>
+            <span className={data.color}>{data.icon}</span>
+            <div>
+              <h3>{data.number}</h3>
+              <p>{data.name}</p>
+            </div>
+          </article>
+        );
+      })}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`
