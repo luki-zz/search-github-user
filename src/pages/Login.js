@@ -1,7 +1,22 @@
 import React from "react";
+import styled from "styled-components";
+import persona from "../images/login-img.svg";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
-  return <div>Login</div>;
+  const { loginWithRedirect } = useAuth0();
+  console.log(useAuth0());
+  return (
+    <Wrapper>
+      <div className="container">
+        <img src={persona} alt="github user" />
+        <h1>github user</h1>
+        <button className="btn" onClick={() => loginWithRedirect()}>
+          Log In / Sign Up
+        </button>
+      </div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`
@@ -20,6 +35,4 @@ const Wrapper = styled.section`
     margin-bottom: 1.5rem;
   }
 `;
-export default Login;
-
 export default Login;
