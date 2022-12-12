@@ -1,8 +1,28 @@
 import React from "react";
 import styled from "styled-components";
+import { useGloblaContext } from "../context/context";
 
 const Followers = () => {
-  return <h2>followers component</h2>;
+  const { followers } = useGloblaContext();
+
+  return (
+    <Wrapper>
+      <div className="followers">
+        {followers.map((follower) => {
+          const { login, avatar_url, url } = follower;
+          return (
+            <article key={login}>
+              <img src={avatar_url} alt={login} />
+              <div>
+                <h4>{login}</h4>
+                <a href={url}>{url}</a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.article`

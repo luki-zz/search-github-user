@@ -5,7 +5,7 @@ import { FiUsers, FiUserPlus } from "react-icons/fi";
 import { useGloblaContext } from "../context/context";
 
 const UserInfo = () => {
-  const { user, repos } = useGloblaContext();
+  const { user } = useGloblaContext();
   console.log(user);
   const { followers, public_gists, public_repos, following } = user;
   const userInfo = [
@@ -38,7 +38,7 @@ const UserInfo = () => {
       color: "yellow",
     },
   ];
-  console.log(userInfo);
+
   return (
     <Wrapper className="section-center">
       {userInfo.map((data) => {

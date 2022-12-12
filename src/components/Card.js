@@ -1,9 +1,34 @@
 import React from "react";
-import { GithubContext } from "../context/context";
+import { useGloblaContext } from "../context/context";
 import styled from "styled-components";
 import { MdBusiness, MdLocationOn, MdLink } from "react-icons/md";
 const Card = () => {
-  return <h2>card component</h2>;
+  const { user } = useGloblaContext();
+  const { login, name, avatar_url, url, bio, company, location, blog } = user;
+  return (
+    <Wrapper>
+      <header>
+        <img src={avatar_url} alt={name} />
+        <div>
+          <h4>{name}</h4>
+          <p>@ {login}</p>
+        </div>
+        <a href={url}>follow</a>
+      </header>
+      <p class="bio">{bio}</p>
+      <div class="links">
+        <p>
+          <MdBusiness /> {company}
+        </p>
+        <p>
+          <MdLocationOn /> {location}
+        </p>
+        <a href="https://www.johnsmilga.com">
+          <MdLink /> {blog}
+        </a>
+      </div>
+    </Wrapper>
+  );
 };
 const Wrapper = styled.article`
   background: var(--clr-white);
