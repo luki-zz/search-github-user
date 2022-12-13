@@ -6,7 +6,6 @@ import { useGloblaContext } from "../context/context";
 
 const UserInfo = () => {
   const { user } = useGloblaContext();
-  console.log(user);
   const { followers, public_gists, public_repos, following } = user;
   const userInfo = [
     {

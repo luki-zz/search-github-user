@@ -15,8 +15,8 @@ const Card = () => {
         </div>
         <a href={url}>follow</a>
       </header>
-      <p class="bio">{bio}</p>
-      <div class="links">
+      <p className="bio">{bio}</p>
+      <div className="links">
         <p>
           <MdBusiness /> {company}
         </p>

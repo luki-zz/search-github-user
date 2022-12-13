@@ -10,7 +10,7 @@ const AppProvider = ({ children }) => {
   const [repos, setRepos] = useState(reposData);
   const [followers, setFollowers] = useState(followersData);
   return (
-    <AppContext.Provider value={{ user, followers }}>
+    <AppContext.Provider value={{ user, followers, repos }}>
       {children}
     </AppContext.Provider>
   );

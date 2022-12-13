@@ -1,8 +1,73 @@
 import React from "react";
 import styled from "styled-components";
+import { useGloblaContext } from "../context/context";
+import { Pie, Column, Doughnut, Bar } from "./charts";
 
 const Repos = () => {
-  return <h2>repos component</h2>;
+  const { repos } = useGloblaContext();
+
+  const languages = repos.reduce((total, item) => {
+    const { language, stargazers_count } = item;
+    if (!language) return total;
+    if (!total[language]) {
+      total[language] = { label: language, value: 1, stars: stargazers_count };
+    } else {
+      total[language] = {
+        ...total[language],
+        value: total[language].value + 1,
+        stars: total[language].stars + stargazers_count,
+      };
+    }
+    return total;
+  }, {});
+
+  const mostPopularLang = Object.values(languages)
+    .sort((a, b) => {
+      return a.value - b.value;
+    })
+    .slice(0, 5);
+
+  const mostStarsLang = Object.values(languages)
+    .sort((a, b) => {
+      return a.stars - b.stars;
+    })
+    .map((item) => {
+      return { ...item, value: item.stars };
+    })
+    .slice(0, 5);
+
+  const mostStarsRepo = repos
+    .map((repo) => {
+      return { label: repo.name, value: repo.stargazers_count };
+    })
+    .sort((a, b) => {
+      return a.value - b.value;
+    })
+    .slice(-5)
+    .reverse();
+
+  console.log(mostStarsRepo);
+
+  const mostForkedRepo = repos
+    .map((repo) => {
+      return { label: repo.name, value: repo.forks_count };
+    })
+    .sort((a, b) => {
+      return a.value - b.value;
+    })
+    .slice(-5)
+    .reverse();
+
+  return (
+    <section className="section">
+      <Wrapper className="section-center">
+        <Pie data={mostPopularLang} />
+        <Column data={mostStarsRepo} />
+        <Doughnut data={mostStarsLang} />
+        <Bar data={mostForkedRepo} />
+      </Wrapper>
+    </section>
+  );
 };
 
 const Wrapper = styled.div`
