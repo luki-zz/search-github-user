@@ -46,8 +46,6 @@ const Repos = () => {
     .slice(-5)
     .reverse();
 
-  console.log(mostStarsRepo);
-
   const mostForkedRepo = repos
     .map((repo) => {
       return { label: repo.name, value: repo.forks_count };

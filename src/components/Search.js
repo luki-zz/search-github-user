@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
+import { useGloblaContext } from "../context/context";
 
 const Search = () => {
-  return <h2>search component</h2>;
+  const { handleSubmit, requests, error } = useGloblaContext();
+  const [inputText, setInputText] = useState("");
+  return (
+    <section className="section">
+      <Wrapper className="section-center">
+        {error.show && (
+          <ErrorWrapper>
+            <p>{error.msg}</p>
+          </ErrorWrapper>
+        )}
+        <form onSubmit={(e) => handleSubmit(e, inputText)}>
+          <div className="form-control">
+            <MdSearch />
+            <input
+              type="text"
+              placeholder="enter github user"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+            />
+            <button type="submit">search</button>
+          </div>
+        </form>
+        <h3>
+          requests : {requests.remaining} / {requests.limit}
+        </h3>
+      </Wrapper>
+    </section>
+  );
 };
 
 const Wrapper = styled.div`
