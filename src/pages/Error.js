@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 const Error = () => {
-  return <div>Error</div>;
+  return (
+    <Wrapper>
+      <h1>404</h1>
+      <p>page not found</p>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`
