@@ -15,7 +15,6 @@ const AppProvider = ({ children }) => {
   const [requests, setRequests] = useState({ limit: 60, remaining: 60 });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ show: false, msg: "" });
-  const [query, setQuery] = useState("");
 
   const getUser = async (user) => {
     // try {
